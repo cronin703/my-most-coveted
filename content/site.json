@@ -1,0 +1,39 @@
+{
+  "name": "My Most Coveted",
+  "tagline": "Personal styling in New York and beyond.",
+  "positioning": "A New York stylist who edits what you own, finds what's missing, and dresses you for the moments that matter, in person or remotely.",
+  "primaryCta": {
+    "label": "Book a consultation",
+    "href": "/contact"
+  },
+  "nav": [
+    {
+      "label": "Services",
+      "href": "/services"
+    },
+    {
+      "label": "Lookbook",
+      "href": "/lookbook"
+    },
+    {
+      "label": "The Process",
+      "href": "/process"
+    },
+    {
+      "label": "About",
+      "href": "/about"
+    }
+  ],
+  "contact": {
+    "email": "hello@example.com",
+    "serviceArea": "New York City, in person \u00b7 Worldwide, remote",
+    "responseTime": "Within 24 hours"
+  },
+  "social": {
+    "instagram": "https://instagram.com/TODO"
+  },
+  "placeholder": true,
+  "todo": [
+    "TODO(client): real email, Instagram handle, domain, confirm business name"
+  ]
+}

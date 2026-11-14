@@ -1,0 +1,20 @@
+[
+  {
+    "quote": "She saw my closet differently than I ever had. I now get dressed in five minutes and feel like myself.",
+    "name": "Sample Client",
+    "context": "Closet Clean",
+    "placeholder": true
+  },
+  {
+    "quote": "From the fitting to the final look, every detail for the gala was handled. I just showed up.",
+    "name": "Sample Client",
+    "context": "Event Styling",
+    "placeholder": true
+  },
+  {
+    "quote": "I live in London and still felt like I had a stylist down the street. The links were perfect for my budget.",
+    "name": "Sample Client",
+    "context": "Digital Lookbook",
+    "placeholder": true
+  }
+]
