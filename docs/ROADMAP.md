@@ -12,7 +12,7 @@
 - [x] Every route from the sitemap exists with a simple styled skeleton + header/footer
 - [x] `scripts/check-placeholders.ts` + `pnpm check:placeholders`; fail prod builds if placeholders remain
 - [x] `.env.example`
-- [ ] Deploy to Vercel (needs the repo imported into Vercel once; see README)
+- [x] Deploy to Vercel: project `my-most-coveted` is linked to GitHub; every phase branch gets a preview URL
 - **Done when:** all routes render on a preview URL, `pnpm build` passes, content is typed end-to-end.
 
 > Prompt: "Read CLAUDE.md, docs/BRIEF.md and docs/ROADMAP.md. Start Phase 1. Restate the acceptance criteria, propose a plan, then build it. Verify every route renders at 375px and 1440px before finishing."
