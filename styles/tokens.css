@@ -1,0 +1,73 @@
+/*
+ * Design tokens: the single source for colour, type, spacing and layout.
+ * BRIEF §5 + editorial-layout skill. Quiet luxury: ivory canvas, ink type,
+ * photography as the only colour.
+ *
+ * Contrast on --ivory (checked):
+ *   --ink 17.8:1 · --stone 5.4:1 (secondary text, labels OK)
+ *   --accent 3.2:1 → focus rings, rules and underlines only, never text
+ *   --accent-text 4.7:1 → the one gold you may use for text
+ */
+:root {
+  /* Colour */
+  --ivory: #faf8f5;
+  --ink: #111111;
+  --stone: #6b6560;
+  --line: #e7e2db;
+  --accent: #a8854a;
+  --accent-text: #8a6a35;
+
+  /* Type families (set by next/font in app/layout.tsx) */
+  --ff-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --ff-body: var(--font-eb-garamond), "EB Garamond", Georgia, serif;
+  --ff-ui: var(--font-inter), "Inter", system-ui, sans-serif;
+
+  /* Type scale */
+  --display-xl: clamp(3.5rem, 14vw, 18rem);
+  --display-l: clamp(2.75rem, 8vw, 9rem);
+  --display-m: clamp(2rem, 5vw, 5rem);
+  --display-s: clamp(1.625rem, 3vw, 2.5rem);
+  --text-lede: clamp(1.25rem, 1.6vw, 1.5rem);
+  --text-body: 1.125rem; /* 18px serif body */
+  --text-small: 1rem;
+  --text-label: 0.75rem; /* 12px minimum for tracked small caps */
+  --leading-display: 0.95;
+  --leading-body: 1.6;
+  --tracking-display: -0.02em;
+  --tracking-label: 0.16em;
+  --measure: 66ch;
+
+  /* 8pt spacing scale */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+  --space-20: 10rem;
+
+  /* Section rhythm: alternate large and medium for pacing */
+  --section-l: clamp(var(--space-12), 11vw, var(--space-20)); /* 96 → 160 */
+  --section-m: clamp(var(--space-8), 7vw, var(--space-12)); /* 64 → 96 */
+
+  /* Layout grid */
+  --page-max: 1440px;
+  --page-margin: clamp(16px, 5vw, 80px);
+  --gutter: 24px;
+  --header-h: 4.5rem;
+
+  /* Motion (CSS side; GSAP tokens arrive in lib/motion.ts in Phase 2) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-hover: 300ms;
+  --dur-ui: 500ms;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: 16px;
+    --header-h: 4rem;
+  }
+}

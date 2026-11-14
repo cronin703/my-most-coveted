@@ -33,7 +33,5 @@
     "instagram": "https://instagram.com/TODO"
   },
   "placeholder": true,
-  "todo": [
-    "TODO(client): real email, Instagram handle, domain, confirm business name"
-  ]
+  "todo": ["TODO(client): real email, Instagram handle, domain, confirm business name"]
 }

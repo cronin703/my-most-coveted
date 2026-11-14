@@ -28,4 +28,14 @@ Everything Claude Code needs to build the site from the plan, with no extra expl
 - A Vercel account (you already have one connected)
 - Later, for the form: a Resend account and API key, Cloudflare Turnstile keys, and her domain
 
+## Working on the site
+```bash
+pnpm install
+pnpm dev                 # http://localhost:3000
+pnpm lint && pnpm typecheck && pnpm build
+pnpm test:e2e            # Playwright smoke tests at 375px and 1440px
+pnpm check:placeholders  # lists placeholder content and TODO(client) notes
+```
+Production builds (`VERCEL_ENV=production`) fail while any content is still flagged `placeholder: true`. Preview builds are fine.
+
 Living plan doc: https://claude.ai/artifact/Lbms6gTB9YB49suJ7mBLod
