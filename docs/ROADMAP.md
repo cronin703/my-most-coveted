@@ -40,6 +40,19 @@
 - [ ] /process, /about, /faq, /contact, /privacy, /terms, 404
 - **Done when:** every sitemap route is complete with placeholder content and passes a11y checks.
 
+## Phase 4.5 — Client editing with Sanity (≈2 days) · `phase-4b-cms`
+Decided 2026-11-15: Sanity (hosted editor, image library with crop/focal point, Google/email login, no GitHub needed for her). Built after Phase 4 so editor screens match the finished pages.
+- [ ] Sanity project + embedded Studio at `/studio` (noindex); she logs in with Google or email
+- [ ] Schemas mirroring `lib/schema.ts`: Site settings, Service, Look, Testimonial
+- [ ] Move hard-coded copy into Sanity: home intro, About, process steps, "what to prepare", FAQs, legal pages (today in `lib/copy.ts` and page files)
+- [ ] Editor rules: alt text required on every image (no "TODO"), a "Sample content" switch on every entry, required fields match the Zod schemas
+- [ ] Swap `lib/content.ts` to read from Sanity (pages unchanged); migrate current placeholder content
+- [ ] Images served through the Sanity CDN with `next/image`; LCP/CLS budgets still met
+- [ ] Publish → Vercel deploy hook rebuilds the site (live in ~1 minute)
+- [ ] `pnpm check:placeholders` and the production-build guard read from Sanity
+- [ ] One-page "How to update your site" guide for her
+- **Done when:** a non-technical editor can log in, replace a photo and edit any page's text, hit Publish, and see it live within ~2 minutes, with no code changes.
+
 ## Phase 5 — Leads, SEO, analytics (days 13–14) · `phase-5-leads`
 - [ ] Inquiry Server Action, Zod validation, honeypot + Turnstile, Resend emails (her + client confirmation), graceful dev fallback
 - [ ] `?service=` prefill; inline form on service pages
@@ -51,10 +64,11 @@
 - [ ] WCAG 2.1 AA audit (run ux-audit + accessibility skills), keyboard + screen reader pass
 - [ ] Device matrix: iOS Safari, Android Chrome, desktop Safari/Chrome/Firefox
 - [ ] Swap in real content; `pnpm check:placeholders` clean
+- [ ] Handover: invite her as Sanity editor; decide account ownership (GitHub, Vercel, Sanity); turn off Vercel Authentication on the production domain
 - [ ] Domain, HTTPS, www redirect, Resend domain SPF/DKIM, Search Console, Google Business Profile
 - **Done when:** launch checklist in BRIEF/plan is fully ticked.
 
 ---
 
 ## Later add-ons (not v1)
-1. Keystatic or Sanity CMS (swap `lib/content.ts`) · 2. Cal.com booking + Stripe deposits · 3. Style intake questionnaire · 4. Journal/newsletter · 5. Client portal for Digital Lookbook clients
+1. ~~Keystatic or Sanity CMS~~ → now Phase 4.5 · 2. Cal.com booking + Stripe deposits · 3. Style intake questionnaire · 4. Journal/newsletter · 5. Client portal for Digital Lookbook clients
