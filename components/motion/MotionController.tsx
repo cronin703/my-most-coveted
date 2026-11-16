@@ -112,12 +112,16 @@ function setupParallax(full: boolean) {
   gsap.utils.toArray<HTMLElement>("[data-parallax]").forEach((el) => {
     const layer = (el.dataset.parallax ?? "bg") as ParallaxLayer;
     const strength = (parallax[layer] ?? parallax.bg) * (full ? 1 : 0.5);
+    const scope = el.closest<HTMLElement>("[data-parallax-scope]") ?? el;
+    // Already on screen at load (the hero): start at the top of the page so the layout
+    // is exactly as designed until the visitor scrolls.
+    const onScreen = scope.getBoundingClientRect().top < window.innerHeight;
     gsap.to(el, {
       yPercent: strength * 100,
       ease: "none",
       scrollTrigger: {
-        trigger: el.closest("[data-parallax-scope]") ?? el,
-        start: "top bottom",
+        trigger: scope,
+        start: onScreen ? 0 : "top bottom",
         end: "bottom top",
         scrub: true,
       },

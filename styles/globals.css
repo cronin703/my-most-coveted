@@ -268,6 +268,170 @@
   }
 }
 
+/* ---------- Phase 3: opening sequence (CSS only, runs from first paint) ---------- */
+@layer components {
+  .intro {
+    --draw: 0.45s;
+    --fill-at: 0.3s;
+    --open-at: 0.5s;
+    --open: 0.45s;
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    color: var(--ink);
+    animation: intro-done 0s linear calc(var(--open-at) + var(--open)) forwards;
+  }
+  @media (min-width: 1024px) and (pointer: fine) {
+    .intro {
+      --draw: 0.9s;
+      --fill-at: 0.75s;
+      --open-at: 1.25s;
+      --open: 1.2s;
+    }
+  }
+  .intro-half {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50.5%;
+    background: var(--ivory);
+    animation: var(--open) var(--ease-in-out) var(--open-at) forwards;
+  }
+  .intro-half--top {
+    top: 0;
+    animation-name: intro-open-up;
+  }
+  .intro-half--bottom {
+    bottom: 0;
+    animation-name: intro-open-down;
+  }
+  .intro-mark {
+    position: relative;
+    width: min(78vw, 46rem);
+    height: auto;
+    animation: intro-fade-out 0.35s var(--ease-out) var(--open-at) forwards;
+  }
+  .intro-stroke path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: intro-draw var(--draw) var(--ease-in-out) forwards;
+  }
+  .intro-stroke {
+    animation: intro-fade-out 0.3s var(--ease-out) var(--fill-at) forwards;
+  }
+  .intro-fill {
+    opacity: 0;
+    animation: intro-fade-in 0.35s var(--ease-out) var(--fill-at) forwards;
+  }
+
+  /* Repeat visit in this session, or reduced motion: never shown. */
+  .intro-skip .intro {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .intro {
+      display: none;
+    }
+  }
+}
+
+@keyframes intro-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes intro-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes intro-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes intro-open-up {
+  to {
+    transform: translateY(-100%);
+  }
+}
+@keyframes intro-open-down {
+  to {
+    transform: translateY(100%);
+  }
+}
+@keyframes intro-done {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* ---------- Phase 3: home chapters ---------- */
+@layer components {
+  /* Title panels open and close each horizontal chapter. */
+  /* Carousel (phone, no-JS): title sits at the top and leaves room for the next
+     panel to peek in. Pinned desktop aligns it to the bottom of the spread. */
+  .pin-panel--title {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-basis: min(72vw, 26rem);
+  }
+  .pin-panel--spread .spread-image {
+    aspect-ratio: 4 / 5;
+  }
+  .pin-panel--spread .spread-text {
+    margin-top: var(--space-3);
+  }
+  .pin-section .pin-panel--end {
+    justify-content: center;
+  }
+
+  /* Desktop pinned: spreads become image + text side by side at viewport height. */
+  .pin-section.is-pinned .pin-panel--title {
+    justify-content: flex-end;
+    flex: 0 0 min(34vw, 30rem);
+    height: calc(100svh - var(--header-h) - 8rem);
+    padding-right: var(--space-6);
+  }
+  .pin-section.is-pinned .pin-panel--spread {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: auto minmax(18rem, 22rem);
+    align-items: end;
+    gap: var(--space-4);
+    height: calc(100svh - var(--header-h) - 8rem);
+    padding-right: var(--space-8);
+  }
+  .pin-section.is-pinned .pin-panel--spread .spread-image {
+    height: 100%;
+    width: auto;
+  }
+  .pin-section.is-pinned .pin-panel--spread .spread-text {
+    margin-top: 0;
+  }
+  /* Looks: staggered heights like a lookbook spread. */
+  .pin-section.is-pinned .pin-panel--look {
+    flex-basis: min(28vw, calc((100svh - var(--header-h) - 14rem) * 0.8));
+    align-self: flex-start;
+  }
+  .pin-section.is-pinned .pin-panel--look:nth-child(odd) {
+    margin-top: var(--space-12);
+  }
+  .looks-chapter.is-pinned .pin-track {
+    align-items: flex-start;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pin-panel--title {
+      max-width: 36rem;
+    }
+  }
+}
+
 /* Every animation and transition becomes instant under reduced motion. */
 @media (prefers-reduced-motion: reduce) {
   *,

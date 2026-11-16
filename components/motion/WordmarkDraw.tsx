@@ -22,7 +22,7 @@ export function WordmarkDraw({ label, className = "" }: { label: string; classNa
         data-stroke=""
         fill="none"
         stroke="currentColor"
-        strokeWidth={6}
+        strokeWidth={36}
         opacity={0}
         aria-hidden="true"
       >

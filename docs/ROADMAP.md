@@ -29,11 +29,12 @@
 > Prompt: "Load the luxury-motion and editorial-layout skills. Start Phase 2…"
 
 ## Phase 3 — Home page, the showpiece (days 6–8) · `phase-3-home`
-- [ ] Opening sequence (once per session)
-- [ ] Parallax hero with type-as-image headline + "Book a consultation"
-- [ ] 01 The Edit intro → 02 Services pinned horizontal chapter → 03 Featured looks → 04 Process → testimonial → final CTA
-- [ ] Mobile composition designed on its own terms (not just a stacked version of desktop)
+- [x] Opening sequence (once per session)
+- [x] Parallax hero with type-as-image headline + "Book a consultation"
+- [x] 01 The Edit intro → 02 Services pinned horizontal chapter → 03 Featured looks → 04 Process → testimonial → final CTA
+- [x] Mobile composition designed on its own terms (not just a stacked version of desktop)
 - **Done when:** client review; LCP < 2.5s mobile; CLS < 0.05; no jank in a Chrome performance trace.
+- Result: Lighthouse mobile with applied throttling (slow 4G, 4× CPU): perf 96–97, LCP 1.7s, CLS 0, a11y 100, best practices 100. Scroll at 4× CPU: 60fps (p95 frame 17ms), no long tasks. Client review pending.
 
 ## Phase 4 — Remaining pages (days 9–12) · `phase-4-pages`
 - [ ] /services + 7 service detail pages (one template)

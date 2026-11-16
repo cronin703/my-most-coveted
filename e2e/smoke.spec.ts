@@ -98,3 +98,19 @@ test("renders with reduced motion", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 });
+
+test("opening sequence plays once per session and never blocks clicks", async ({ page }) => {
+  await page.goto("/");
+  const intro = page.locator(".intro");
+  await expect(intro).toHaveCSS("pointer-events", "none");
+  await expect(intro).toHaveCSS("visibility", "hidden", { timeout: 4000 });
+  await page.reload();
+  await expect(intro).toHaveCSS("display", "none");
+});
+
+test("opening sequence is skipped with reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await expect(page.locator(".intro")).toHaveCSS("display", "none");
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+});

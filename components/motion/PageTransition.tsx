@@ -12,6 +12,7 @@ import {
   type MouseEvent,
   type ReactNode,
 } from "react";
+import { markHydrated } from "@/lib/hydration";
 import { mq } from "@/lib/motion";
 
 /**
@@ -26,6 +27,8 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const finish = useRef<(() => void) | null>(null);
+
+  useEffect(() => markHydrated(), []);
 
   // The new route has committed: let the browser animate to it.
   useEffect(() => {

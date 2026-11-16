@@ -26,11 +26,12 @@ export function Reveal({
 /** Heading whose lines rise out of a mask, one after another. */
 export function SplitHeading({
   as: Tag = "h2",
+  id,
   className,
   children,
-}: Base & { as?: "h1" | "h2" | "h3" | "p" }) {
+}: Base & { as?: "h1" | "h2" | "h3" | "p"; id?: string }) {
   return (
-    <Tag data-split="" className={className}>
+    <Tag data-split="" id={id} className={className}>
       {children}
     </Tag>
   );

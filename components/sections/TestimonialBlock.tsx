@@ -1,13 +1,14 @@
 import type { Testimonial } from "@/lib/schema";
 import { PlaceholderFlag } from "@/components/ui/PlaceholderFlag";
+import { SplitHeading } from "@/components/motion/primitives";
 
 export function TestimonialBlock({ testimonial }: { testimonial: Testimonial }) {
   return (
     <figure className="frame grid-editorial section-l">
       <blockquote className="col-span-4 md:col-span-9 md:col-start-2">
-        <p className="display-s font-display font-light italic leading-[1.15]">
+        <SplitHeading as="p" className="display-s font-display leading-[1.15] font-light italic">
           “{testimonial.quote}”
-        </p>
+        </SplitHeading>
       </blockquote>
       <figcaption className="col-span-4 mt-8 flex items-center gap-4 md:col-span-6 md:col-start-2">
         <span className="label">

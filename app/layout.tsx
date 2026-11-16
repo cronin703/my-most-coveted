@@ -22,6 +22,7 @@ const ebGaramond = EB_Garamond({
   style: ["normal"],
   variable: "--font-eb-garamond",
   display: "swap",
+  preload: false,
 });
 
 const inter = Inter({
@@ -29,6 +30,7 @@ const inter = Inter({
   weight: ["400", "500"],
   variable: "--font-inter",
   display: "swap",
+  preload: false,
 });
 
 const site = getSite();
@@ -45,7 +47,20 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${ebGaramond.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${ebGaramond.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Opening sequence plays once per session: mark repeat visits before first paint. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('mmc-intro'))document.documentElement.classList.add('intro-skip');else sessionStorage.setItem('mmc-intro','1')}catch(e){}",
+          }}
+        />
+      </head>
       <body>
         <a
           href="#main"
