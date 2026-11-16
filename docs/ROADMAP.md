@@ -44,6 +44,7 @@
 ## Phase 4.5 — Client editing with Sanity (≈2 days) · `phase-4b-cms`
 Decided 2026-11-16: Sanity with visual (on-page) editing. She opens her site, clicks any text or photo and edits it in place with a live preview. Logs in with Google or email; she never needs a GitHub account. Free plan. Built after Phase 4 so editing matches the finished pages.
 - [ ] Sanity project + embedded Studio at `/studio` (noindex); she logs in with Google or email, no GitHub account
+- [ ] Access: editing is invite-only (no public sign-up). Nick = Administrator (invites/removes people, settings); client = Editor (edit + publish only). Visitors can view the site but never reach the editor without a login. Dataset stays private to editors; the site reads published content only
 - [ ] Schemas mirroring `lib/schema.ts`: Site settings, Service, Look, Testimonial
 - [ ] Move hard-coded copy into Sanity: home intro, About, process steps, "what to prepare", FAQs, legal pages (today in `lib/copy.ts` and page files)
 - [ ] Editor rules: alt text required on every image (no "TODO"), a "Sample content" switch on every entry, required fields match the Zod schemas
