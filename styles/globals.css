@@ -8,6 +8,7 @@
   --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-text: var(--accent-text);
+  --color-error: var(--error);
 
   --font-display: var(--ff-display);
   --font-serif: var(--ff-body);
@@ -144,6 +145,126 @@
     text-decoration: underline;
     text-decoration-color: var(--accent);
     text-underline-offset: 0.2em;
+  }
+}
+
+/* ---------- Phase 2: system components ---------- */
+@layer components {
+  /* Overlay menu: clip-path wipe down, links rise in sequence. */
+  .overlay-menu {
+    visibility: hidden;
+    clip-path: inset(0 0 100% 0);
+    transition:
+      clip-path var(--dur-ui) var(--ease-in-out),
+      visibility 0s linear var(--dur-ui);
+  }
+  .overlay-menu[data-open="true"] {
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+    transition:
+      clip-path var(--dur-ui) var(--ease-in-out),
+      visibility 0s;
+  }
+  .overlay-item {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity var(--dur-ui) var(--ease-out),
+      transform var(--dur-ui) var(--ease-out);
+  }
+  .overlay-menu[data-open="true"] .overlay-item {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(200ms + var(--i) * 80ms);
+  }
+  .overlay-preview {
+    opacity: 0;
+    transform: scale(1.03);
+    transition:
+      opacity var(--dur-ui) var(--ease-out),
+      transform 900ms var(--ease-out);
+  }
+  .overlay-preview[data-active="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Horizontal chapter: native scroll-snap carousel by default (mobile, no-JS). */
+  .pin-track {
+    position: relative; /* contains absolutely positioned children (e.g. sr-only text) */
+    display: flex;
+    gap: var(--gutter);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--page-margin);
+    padding-inline: var(--page-margin);
+    padding-bottom: var(--space-2);
+    scrollbar-width: thin;
+  }
+  .pin-panel {
+    flex: 0 0 min(82vw, 30rem);
+    scroll-snap-align: start;
+  }
+  /* Desktop with motion: the controller pins the section and moves the track. */
+  .pin-section.is-pinned {
+    overflow: hidden;
+  }
+  .pin-section.is-pinned .pin-track {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+  .pin-section.is-pinned {
+    padding-top: var(--space-4);
+  }
+  .pin-section.is-pinned .pin-panel {
+    /* 4:5 image + caption must fit in the viewport below the header. */
+    flex-basis: min(42vw, calc((100svh - var(--header-h) - 13rem) * 0.8));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pin-track {
+      flex-direction: column;
+      overflow: visible;
+      scroll-snap-type: none;
+    }
+    .pin-panel {
+      flex-basis: auto;
+    }
+  }
+
+  /* Accordion */
+  .accordion > summary {
+    list-style: none;
+  }
+  .accordion > summary::-webkit-details-marker {
+    display: none;
+  }
+  .accordion[open] .accordion-body {
+    animation: fade-in var(--dur-ui) var(--ease-out);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+/* Route cross-fade (View Transitions API). The header holds still. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--dur-route);
+  animation-timing-function: var(--ease-in-out);
+}
+.site-header {
+  view-transition-name: site-header;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
 

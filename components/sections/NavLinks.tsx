@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { TransitionLink } from "@/components/motion/PageTransition";
 
 type Item = { label: string; href: string };
 
@@ -16,13 +16,13 @@ export function NavLinks({ items }: { items: Item[] }) {
     <ul className="flex items-center gap-8">
       {items.map((item) => (
         <li key={item.href}>
-          <Link
+          <TransitionLink
             href={item.href}
             aria-current={isActive(pathname, item.href) ? "page" : undefined}
             className="label link-draw inline-flex min-h-11 items-center"
           >
             {item.label}
-          </Link>
+          </TransitionLink>
         </li>
       ))}
     </ul>

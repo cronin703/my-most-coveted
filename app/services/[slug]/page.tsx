@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatPrice, getService, getServices, getLooks, serviceNumber } from "@/lib/content";
+import { Accordion } from "@/components/ui/Accordion";
 import { Button } from "@/components/ui/Button";
 import { ChapterLabel } from "@/components/ui/ChapterLabel";
 import { Mdx } from "@/components/ui/Mdx";
@@ -66,7 +67,8 @@ export default async function ServicePage({ params }: Props) {
             alt={service.heroImage.alt}
             width={1600}
             height={2000}
-            priority
+            loading="eager"
+            fetchPriority="high"
             sizes="(min-width: 768px) 38vw, 100vw"
             className="aspect-[4/5] w-full object-cover"
           />
@@ -107,14 +109,9 @@ export default async function ServicePage({ params }: Props) {
       {service.faqs.length > 0 ? (
         <section className="frame grid-editorial section-m border-t border-line">
           <h2 className="display-s col-span-4 md:col-span-4">Questions</h2>
-          <dl className="col-span-4 mt-6 md:col-span-7 md:col-start-6 md:mt-0">
-            {service.faqs.map((faq) => (
-              <div key={faq.q} className="border-t border-line py-5 last:border-b">
-                <dt className="font-display text-[1.5rem] leading-tight">{faq.q}</dt>
-                <dd className="mt-2 text-stone">{faq.a}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="col-span-4 mt-6 md:col-span-7 md:col-start-6 md:mt-0">
+            <Accordion items={service.faqs} />
+          </div>
         </section>
       ) : null}
 

@@ -7,6 +7,7 @@ import { ChapterLabel } from "@/components/ui/ChapterLabel";
 import { LookCard } from "@/components/sections/LookCard";
 import { TestimonialBlock } from "@/components/sections/TestimonialBlock";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { ChapterIndex } from "@/components/motion/ChapterIndex";
 
 /**
  * Home, Phase 1 skeleton. Section order follows BRIEF §4; the opening sequence,
@@ -20,6 +21,7 @@ export default function HomePage() {
 
   return (
     <>
+      <ChapterIndex />
       {/* Hero: type-as-image headline over the image edge */}
       <section className="frame grid-editorial pt-[var(--space-6)] pb-[var(--section-m)] md:pt-[var(--space-8)]">
         <h1 className="display-xl relative z-10 col-span-4 md:col-span-11">
@@ -32,7 +34,8 @@ export default function HomePage() {
             alt="Placeholder image for the hero: the styling atelier"
             width={2400}
             height={1600}
-            priority
+            loading="eager"
+            fetchPriority="high"
             sizes="(min-width: 768px) 66vw, 100vw"
             className="aspect-[3/2] w-full object-cover"
           />

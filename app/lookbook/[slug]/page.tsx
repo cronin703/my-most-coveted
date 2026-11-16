@@ -36,7 +36,8 @@ export default async function LookPage({ params }: Props) {
             alt={look.cover.alt}
             width={1200}
             height={1500}
-            priority
+            loading="eager"
+            fetchPriority="high"
             sizes="(min-width: 768px) 46vw, 100vw"
             className="aspect-[4/5] w-full object-cover"
           />

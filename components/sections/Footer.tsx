@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/motion/PageTransition";
 import { getSite } from "@/lib/content";
 
 export function Footer() {

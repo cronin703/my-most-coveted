@@ -18,12 +18,13 @@
 > Prompt: "Read CLAUDE.md, docs/BRIEF.md and docs/ROADMAP.md. Start Phase 1. Restate the acceptance criteria, propose a plan, then build it. Verify every route renders at 375px and 1440px before finishing."
 
 ## Phase 2 — Design system & motion engine (days 3–5) · `phase-2-system`
-- [ ] UI primitives + section components (BRIEF §5 list), wordmark SVG
-- [ ] `lib/motion.ts` tokens; `components/motion/*`: SmoothScroll (Lenis↔GSAP ticker), Reveal, SplitHeading, Parallax, ImageReveal, PinnedHorizontal, Cursor, Magnetic, PageTransition
-- [ ] Global reduced-motion handling (`gsap.matchMedia`) + no-JS fallback
-- [ ] Overlay menu with focus trap, Esc to close, focus restore
-- [ ] `/styleguide` (noindex) showing every component and motion pattern
+- [x] UI primitives + section components (BRIEF §5 list), wordmark SVG
+- [x] `lib/motion.ts` tokens; `components/motion/*`: SmoothScroll (Lenis↔GSAP ticker), Reveal, SplitHeading, Parallax, ImageReveal, PinnedHorizontal, Cursor, Magnetic, PageTransition
+- [x] Global reduced-motion handling (`gsap.matchMedia`) + no-JS fallback
+- [x] Overlay menu with focus trap, Esc to close, focus restore
+- [x] `/styleguide` (noindex) showing every component and motion pattern
 - **Done when:** styleguide works at 375/1440, with reduced-motion on/off, keyboard-only; Lighthouse ≥ 90 mobile on /styleguide.
+- Result: Lighthouse mobile /styleguide 91 perf, 100 a11y, 100 best practices; home 93. Mobile LCP ≈3.0s under Lighthouse's slow-4G simulation: Phase 3 must bring the home page under 2.5s (font payload is the main lever).
 
 > Prompt: "Load the luxury-motion and editorial-layout skills. Start Phase 2…"
 

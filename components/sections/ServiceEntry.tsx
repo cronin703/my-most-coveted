@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/motion/PageTransition";
 import { formatPrice, serviceNumber } from "@/lib/content";
 import type { Service } from "@/lib/schema";
 import { PlaceholderFlag } from "@/components/ui/PlaceholderFlag";

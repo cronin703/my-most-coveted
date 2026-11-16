@@ -16,6 +16,7 @@
   --line: #e7e2db;
   --accent: #a8854a;
   --accent-text: #8a6a35;
+  --error: #9b2c1f; /* form errors, 7.1:1 on ivory */
 
   /* Type families (set by next/font in app/layout.tsx) */
   --ff-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
@@ -63,6 +64,7 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-hover: 300ms;
   --dur-ui: 500ms;
+  --dur-route: 600ms;
 }
 
 @media (max-width: 767px) {

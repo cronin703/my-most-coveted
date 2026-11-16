@@ -3,6 +3,8 @@ import { Cormorant_Garamond, EB_Garamond, Inter } from "next/font/google";
 import { getSite } from "@/lib/content";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
+import { MotionRoot } from "@/components/motion/MotionRoot";
+import { TransitionProvider } from "@/components/motion/PageTransition";
 import "@/styles/globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -13,10 +15,11 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
+// Roman only: body italics are rare, and dropping the italic file saves ~43 KB on mobile.
 const ebGaramond = EB_Garamond({
   subsets: ["latin"],
   weight: ["400", "600"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   variable: "--font-eb-garamond",
   display: "swap",
 });
@@ -50,11 +53,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <Header />
-        <main id="main" tabIndex={-1} className="outline-none">
-          {children}
-        </main>
-        <Footer />
+        <TransitionProvider>
+          <Header />
+          <main id="main" tabIndex={-1} className="outline-none">
+            {children}
+          </main>
+          <Footer />
+        </TransitionProvider>
+        <MotionRoot />
       </body>
     </html>
   );

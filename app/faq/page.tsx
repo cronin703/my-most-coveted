@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getServices } from "@/lib/content";
 import { generalFaqs } from "@/lib/copy";
+import { Accordion } from "@/components/ui/Accordion";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { FinalCta } from "@/components/sections/FinalCta";
 
@@ -29,17 +30,11 @@ export default function FaqPage() {
         }
         lede="Draft answers, to be confirmed with her before launch."
       />
-      <dl className="frame grid-editorial pb-[var(--section-l)]">
-        {faqs.map((faq) => (
-          <div
-            key={faq.q}
-            className="col-span-4 border-t border-line py-6 md:col-span-8 md:col-start-3"
-          >
-            <dt className="font-display text-[1.75rem] leading-tight">{faq.q}</dt>
-            <dd className="measure mt-3 text-stone">{faq.a}</dd>
-          </div>
-        ))}
-      </dl>
+      <div className="frame grid-editorial pb-[var(--section-l)]">
+        <div className="col-span-4 md:col-span-8 md:col-start-3">
+          <Accordion items={faqs} />
+        </div>
+      </div>
       <FinalCta />
     </>
   );

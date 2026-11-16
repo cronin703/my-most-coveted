@@ -1,5 +1,6 @@
-import Link from "next/link";
 import type { ComponentProps } from "react";
+import { TransitionLink } from "@/components/motion/PageTransition";
+import { Magnetic } from "@/components/motion/primitives";
 
 type Variant = "solid" | "outline" | "text";
 
@@ -12,12 +13,23 @@ const variants: Record<Variant, string> = {
   text: "group text-ink",
 };
 
-type Props = ComponentProps<typeof Link> & { variant?: Variant };
+type Props = ComponentProps<typeof TransitionLink> & {
+  variant?: Variant;
+  /** Desktop pointer pull. On by default for solid CTAs. */
+  magnetic?: boolean;
+};
 
-/** Link-styled button. `text` variant carries a drawn underline and an arrow. */
-export function Button({ variant = "solid", className = "", children, ...props }: Props) {
-  return (
-    <Link className={`${base} ${variants[variant]} ${className}`} {...props}>
+/**
+ * Link-styled button with route cross-fade. Solid CTAs are magnetic and show the
+ * "Book" cursor on desktop. The `text` variant draws its underline and nudges its arrow.
+ */
+export function Button({ variant = "solid", magnetic, className = "", children, ...props }: Props) {
+  const link = (
+    <TransitionLink
+      data-cursor={variant === "solid" ? "Book" : undefined}
+      className={`${base} ${variants[variant]} ${className}`}
+      {...props}
+    >
       {variant === "text" ? (
         <>
           <span className="link-draw">{children}</span>
@@ -31,6 +43,7 @@ export function Button({ variant = "solid", className = "", children, ...props }
       ) : (
         children
       )}
-    </Link>
+    </TransitionLink>
   );
+  return (magnetic ?? variant === "solid") ? <Magnetic>{link}</Magnetic> : link;
 }

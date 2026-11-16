@@ -33,8 +33,14 @@ for (const route of routes) {
       () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
     );
     expect(overflow).toBeLessThanOrEqual(0);
-    // Every image has alt text.
-    expect(await page.locator("img:not([alt]), img[alt='']").count()).toBe(0);
+    // Every meaningful image has alt text (decorative ones live inside aria-hidden).
+    const missingAlt = await page.evaluate(
+      () =>
+        [...document.querySelectorAll("img")].filter(
+          (img) => !img.closest("[aria-hidden='true']") && !img.getAttribute("alt"),
+        ).length,
+    );
+    expect(missingAlt).toBe(0);
   });
 }
 
@@ -49,18 +55,42 @@ test("?service= shows the selected service on /contact", async ({ page }) => {
   await expect(page.getByText("Selected service:")).toContainText("Event Styling");
 });
 
-test("mobile menu opens, closes with Escape and returns focus", async ({ page }, info) => {
-  test.skip(info.project.name !== "mobile", "mobile only");
+test("overlay menu: dialog, focus trap, Escape returns focus", async ({ page }, info) => {
+  test.skip(info.project.name !== "mobile", "menu is used below 1024px");
   await page.goto("/");
-  const toggle = page.getByRole("button", { name: "Menu" });
-  await toggle.click();
-  await expect(page.getByRole("button", { name: "Close" })).toHaveAttribute(
-    "aria-expanded",
-    "true",
-  );
-  await expect(page.getByRole("link", { name: /Lookbook/ }).first()).toBeVisible();
+  const trigger = page.getByRole("button", { name: "Menu" });
+  await trigger.click();
+  const dialog = page.getByRole("dialog", { name: "Menu" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole("button", { name: "Close" })).toBeFocused();
+  // Focus stays inside the dialog.
+  for (let i = 0; i < 12; i++) await page.keyboard.press("Tab");
+  expect(await dialog.evaluate((el) => el.contains(document.activeElement))).toBe(true);
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("button", { name: "Menu" })).toBeFocused();
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
+});
+
+test("overlay menu link navigates and closes", async ({ page }, info) => {
+  test.skip(info.project.name !== "mobile", "menu is used below 1024px");
+  await page.goto("/");
+  await page.getByRole("button", { name: "Menu" }).click();
+  await page
+    .getByRole("dialog")
+    .getByRole("link", { name: /Lookbook/ })
+    .click();
+  await expect(page).toHaveURL(/\/lookbook$/);
+  await expect(page.getByRole("dialog")).toBeHidden();
+});
+
+test("no console errors on the styleguide", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
+  await page.goto("/styleguide");
+  await page.mouse.wheel(0, 4000);
+  await page.waitForTimeout(800);
+  expect(errors).toEqual([]);
 });
 
 test("renders with reduced motion", async ({ page }) => {
