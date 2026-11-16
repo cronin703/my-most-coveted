@@ -41,17 +41,19 @@
 - **Done when:** every sitemap route is complete with placeholder content and passes a11y checks.
 
 ## Phase 4.5 — Client editing with Sanity (≈2 days) · `phase-4b-cms`
-Decided 2026-11-15: Sanity (hosted editor, image library with crop/focal point, Google/email login, no GitHub needed for her). Built after Phase 4 so editor screens match the finished pages.
-- [ ] Sanity project + embedded Studio at `/studio` (noindex); she logs in with Google or email
+Decided 2026-11-16: Sanity with visual (on-page) editing. She opens her site, clicks any text or photo and edits it in place with a live preview. Logs in with Google or email; she never needs a GitHub account. Free plan. Built after Phase 4 so editing matches the finished pages.
+- [ ] Sanity project + embedded Studio at `/studio` (noindex); she logs in with Google or email, no GitHub account
 - [ ] Schemas mirroring `lib/schema.ts`: Site settings, Service, Look, Testimonial
 - [ ] Move hard-coded copy into Sanity: home intro, About, process steps, "what to prepare", FAQs, legal pages (today in `lib/copy.ts` and page files)
 - [ ] Editor rules: alt text required on every image (no "TODO"), a "Sample content" switch on every entry, required fields match the Zod schemas
 - [ ] Swap `lib/content.ts` to read from Sanity (pages unchanged); migrate current placeholder content
+- [ ] Visual editing: Sanity Presentation tool with the live site in the main panel; every editable text block and image is click-to-edit (stega overlays), drafts preview before Publish
+- [ ] Motion stays out of the way while editing (reveals and pinning disabled in preview so nothing moves under her cursor)
 - [ ] Images served through the Sanity CDN with `next/image`; LCP/CLS budgets still met
 - [ ] Publish → Vercel deploy hook rebuilds the site (live in ~1 minute)
 - [ ] `pnpm check:placeholders` and the production-build guard read from Sanity
 - [ ] One-page "How to update your site" guide for her
-- **Done when:** a non-technical editor can log in, replace a photo and edit any page's text, hit Publish, and see it live within ~2 minutes, with no code changes.
+- **Done when:** a non-technical editor with no GitHub account can log in, click a photo or any text on the page, change it, hit Publish, and see it live within ~2 minutes, with no code changes.
 
 ## Phase 5 — Leads, SEO, analytics (days 13–14) · `phase-5-leads`
 - [ ] Inquiry Server Action, Zod validation, honeypot + Turnstile, Resend emails (her + client confirmation), graceful dev fallback
