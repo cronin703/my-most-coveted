@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getLooks } from "@/lib/content";
 import { lookCategories } from "@/lib/schema";
 import { PageIntro } from "@/components/sections/PageIntro";
-import { LookCard } from "@/components/sections/LookCard";
+import { Suspense } from "react";
+import { LookbookGrid, LookbookGridFromUrl } from "@/components/sections/LookbookGrid";
 import { FinalCta } from "@/components/sections/FinalCta";
 
 export const metadata: Metadata = {
@@ -12,7 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default function LookbookPage() {
-  const looks = getLooks();
   return (
     <>
       <PageIntro
@@ -24,17 +24,10 @@ export default function LookbookPage() {
           </>
         }
         lede="Real wardrobes, real moments. Each story shows the brief, the edit and the result."
-      >
-        {/* Filtering arrives in Phase 4; categories are listed for orientation. */}
-        <p className="label text-stone">{lookCategories.join(" · ")}</p>
-      </PageIntro>
-      <div className="frame grid gap-x-[var(--gutter)] gap-y-16 pb-[var(--section-l)] sm:grid-cols-2 lg:grid-cols-3">
-        {looks.map((look, i) => (
-          <div key={look.slug} className={i % 3 === 1 ? "lg:mt-24" : undefined}>
-            <LookCard look={look} eager={i < 2} />
-          </div>
-        ))}
-      </div>
+      />
+      <Suspense fallback={<LookbookGrid looks={getLooks()} categories={lookCategories} />}>
+        <LookbookGridFromUrl looks={getLooks()} categories={lookCategories} />
+      </Suspense>
       <FinalCta />
     </>
   );

@@ -37,10 +37,11 @@
 - Result: Lighthouse mobile with applied throttling (slow 4G, 4× CPU): perf 96–97, LCP 1.7s, CLS 0, a11y 100, best practices 100. Scroll at 4× CPU: 60fps (p95 frame 17ms), no long tasks. Client review pending.
 
 ## Phase 4 — Remaining pages (days 9–12) · `phase-4-pages`
-- [ ] /services + 7 service detail pages (one template)
-- [ ] /lookbook (filter) + entry template with View Transition morph
-- [ ] /process, /about, /faq, /contact, /privacy, /terms, 404
+- [x] /services + 7 service detail pages (one template)
+- [x] /lookbook (filter) + entry template with View Transition morph
+- [x] /process, /about, /faq, /contact, /privacy, /terms, 404
 - **Done when:** every sitemap route is complete with placeholder content and passes a11y checks.
+- Result: Lighthouse accessibility 100 on all 20 auditable routes (the 404 returns status 404, which Lighthouse does not audit; covered by e2e).
 
 ## Phase 4.5 — Client editing with Sanity (≈2 days) · `phase-4b-cms`
 Decided 2026-11-16: Sanity with visual (on-page) editing. She opens her site, clicks any text or photo and edits it in place with a live preview. Logs in with Google or email; she never needs a GitHub account. Free plan. Built after Phase 4 so editing matches the finished pages.

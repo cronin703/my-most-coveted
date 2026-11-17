@@ -7,7 +7,8 @@ export function LookCard({ look, eager = false }: { look: Look; eager?: boolean 
   return (
     <article className="group">
       <Link href={`/lookbook/${look.slug}`} className="block" data-cursor="View">
-        <div className="overflow-hidden">
+        {/* Shared name lets the photo morph into the look page's hero (View Transitions). */}
+        <div className="overflow-hidden" style={{ viewTransitionName: `look-${look.slug}` }}>
           <Image
             src={look.cover.src}
             alt={look.cover.alt}

@@ -114,3 +114,41 @@ test("opening sequence is skipped with reduced motion", async ({ page }) => {
   await expect(page.locator(".intro")).toHaveCSS("display", "none");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 });
+
+test("lookbook filters narrow the grid, share via URL, and handle empty categories", async ({
+  page,
+}) => {
+  await page.goto("/lookbook");
+  const cards = page.locator("main article");
+  await expect(cards).toHaveCount(3);
+  await page.getByRole("button", { name: /^Event/ }).click();
+  await expect(cards).toHaveCount(1);
+  await expect(page).toHaveURL(/category=Event/);
+  await page.getByRole("button", { name: /^Remote/ }).click();
+  await expect(page.getByText(/No remote stories/)).toBeVisible();
+  await page.getByRole("button", { name: "Show all looks" }).click();
+  await expect(cards).toHaveCount(3);
+  await page.goto("/lookbook?category=Everyday");
+  await expect(cards).toHaveCount(1);
+  await expect(page.getByRole("button", { name: /^Everyday/ })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+});
+
+test("look card photo morphs into the look page (shared view-transition name)", async ({
+  page,
+}) => {
+  await page.goto("/lookbook");
+  const name = await page
+    .locator("main article [style*='view-transition-name']")
+    .first()
+    .evaluate((el) => getComputedStyle(el).viewTransitionName);
+  await page.locator("main article a").first().click();
+  await expect(page).toHaveURL(/\/lookbook\/.+/);
+  const target = await page
+    .locator("header [style*='view-transition-name']")
+    .first()
+    .evaluate((el) => getComputedStyle(el).viewTransitionName);
+  expect(target).toBe(name);
+});

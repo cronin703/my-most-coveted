@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { processSteps, prepareList } from "@/lib/copy";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { Reveal } from "@/components/motion/primitives";
 
 export const metadata: Metadata = {
   title: "The Process",
@@ -24,7 +25,8 @@ export default function ProcessPage() {
       />
       <ol className="frame">
         {processSteps.map((step, i) => (
-          <li
+          <Reveal
+            as="li"
             key={step.title}
             className="grid-editorial gap-y-4 border-t border-line py-[var(--section-m)]"
           >
@@ -36,7 +38,7 @@ export default function ProcessPage() {
               <p className="lede">{step.summary}</p>
               <p className="mt-4 text-stone">{step.detail}</p>
             </div>
-          </li>
+          </Reveal>
         ))}
       </ol>
       <section className="frame grid-editorial section-m border-t border-line">

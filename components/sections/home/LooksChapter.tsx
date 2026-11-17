@@ -29,7 +29,7 @@ export function LooksChapter({ looks }: { looks: Look[] }) {
               data-cursor="View"
               className="group block"
             >
-              <div className="overflow-hidden">
+              <div className="overflow-hidden" style={{ viewTransitionName: `look-${look.slug}` }}>
                 <Image
                   data-pin-drift=""
                   src={look.cover.src}

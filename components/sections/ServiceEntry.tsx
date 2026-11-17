@@ -3,6 +3,7 @@ import { TransitionLink as Link } from "@/components/motion/PageTransition";
 import { formatPrice, serviceNumber } from "@/lib/content";
 import type { Service } from "@/lib/schema";
 import { PlaceholderFlag } from "@/components/ui/PlaceholderFlag";
+import { ImageReveal, Reveal } from "@/components/motion/primitives";
 
 const modeLabel: Record<Service["mode"], string> = {
   "in-person": "In person",
@@ -25,19 +26,19 @@ export function ServiceEntry({ service, flip = false }: { service: Service; flip
   ];
   return (
     <article className="grid-editorial items-end gap-y-8 border-t border-line py-[var(--section-m)]">
-      <div className={`col-span-4 md:col-span-5 ${flip ? "md:col-start-8" : ""} md:row-start-1`}>
-        <Image
-          src={service.heroImage.src}
-          alt={service.heroImage.alt}
-          width={1600}
-          height={2000}
-          sizes="(min-width: 768px) 38vw, 100vw"
-          className="aspect-[4/5] w-full object-cover"
-        />
+      <div className={`col-[1/-1] md:row-start-1 ${flip ? "md:col-[8/13]" : "md:col-[1/6]"}`}>
+        <ImageReveal>
+          <Image
+            src={service.heroImage.src}
+            alt={service.heroImage.alt}
+            width={1600}
+            height={2000}
+            sizes="(min-width: 768px) 38vw, 100vw"
+            className="aspect-[4/5] w-full object-cover"
+          />
+        </ImageReveal>
       </div>
-      <div
-        className={`col-span-4 md:col-span-6 md:row-start-1 ${flip ? "md:col-start-1" : "md:col-start-7"}`}
-      >
+      <Reveal className={`col-[1/-1] md:row-start-1 ${flip ? "md:col-[1/7]" : "md:col-[7/13]"}`}>
         <div className="flex items-center gap-4">
           <p className="label text-stone">
             <span className="text-ink">{serviceNumber(service.order)}</span> ·{" "}
@@ -73,7 +74,7 @@ export function ServiceEntry({ service, flip = false }: { service: Service; flip
             →
           </span>
         </Link>
-      </div>
+      </Reveal>
     </article>
   );
 }
