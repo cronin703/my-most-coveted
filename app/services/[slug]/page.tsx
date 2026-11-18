@@ -67,7 +67,7 @@ export default async function ServicePage({ params }: Props) {
       <section className="frame grid-editorial gap-y-10 pt-[var(--section-m)] pb-[var(--section-m)]">
         <div className="col-[1/-1] md:col-[1/7] md:row-start-1 md:self-end">
           <p className="label text-stone">
-            <TransitionLink href="/services" className="link-draw">
+            <TransitionLink href="/services" className="link-draw inline-flex min-h-6 items-center">
               Services
             </TransitionLink>{" "}
             · {modeLabel[service.mode]}

@@ -67,7 +67,10 @@ export default function ContactPage() {
             <div>
               <dt className="label text-stone">Email</dt>
               <dd className="mt-1 break-all">
-                <a href={`mailto:${site.contact.email}`} className="link-draw">
+                <a
+                  href={`mailto:${site.contact.email}`}
+                  className="link-draw inline-flex min-h-6 items-center"
+                >
                   {site.contact.email}
                 </a>
               </dd>

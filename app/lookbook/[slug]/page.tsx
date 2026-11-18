@@ -56,13 +56,16 @@ export default async function LookPage({ params }: Props) {
           </div>
           <div className="col-[1/-1] md:col-[8/13] md:row-start-1 md:self-end">
             <p className="label text-stone">
-              <TransitionLink href="/lookbook" className="link-draw">
+              <TransitionLink
+                href="/lookbook"
+                className="link-draw inline-flex min-h-6 items-center"
+              >
                 Lookbook
               </TransitionLink>{" "}
               ·{" "}
               <TransitionLink
                 href={`/lookbook?category=${encodeURIComponent(look.category)}`}
-                className="link-draw"
+                className="link-draw inline-flex min-h-6 items-center"
               >
                 {look.category}
               </TransitionLink>
